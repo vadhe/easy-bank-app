@@ -1,44 +1,33 @@
 ---
 import { Image } from "astro:assets";
-import article from "../images/article.png";
-
+import type { ApiArticleArticle } from "../generated/contentTypes";
+import fetchApi from "../lib/strapi";
+const articles = await fetchApi<ApiArticleArticle[]>({
+  endpoint: 'articles',
+  wrappedByKey: 'data',
+  query : {
+	populate: '*'
+  }
+});
 ---
 
-<section class=" px-6 py-16">
-    <h2 class="text-[32px] text-center lg:text-left font-light text-martinique-950 mb-8">Latest Articles</h2>
+<section class="px-6 py-16 lg:px-32 ">
+   <h2 class="text-[32px] text-center lg:text-left font-light text-martinique-950 mb-8">Latest Articles</h2>
    <div class="flex flex-col lg:flex-row gap-6">
-    <div class="shadow-sm shadow-gray-500/50">
-        <Image src={article} alt="A bird sitting on a nest of eggs." />
+      {
+         articles.map((article: ApiArticleArticle) => (
+         <a href={`/blog/${article.attributes.slug}/`} class="shadow-sm shadow-gray-500/50 lg:max-w-xs">
+         <Image width="200"
+         height="150" class="w-full min-h-[217px] max-h-[217px] rounded-t-lg" 
+         src={`${import.meta.env.STRAPI_URL}${article.attributes.image.data.attributes.formats.thumbnail.url}`}
+         alt={`${article.attributes.image.data.attributes.name}`}/>
          <div class="px-[31px] py-[25px] flex flex-col gap-2">
-            <span class="text-[10px] text-manatee-600">By Claire Robinson</span>
-            <h3 class="text-base text-martinique-950 font-light">Receive money in any currency with no fees</h3>
-            <p class="text-[13px] text-manatee-600">The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …</p>
+            <span class="text-[10px] text-manatee-600">By {article.attributes.author.data.attributes.name}</span>
+            <h3 class="text-base text-martinique-950 font-light line-clamp-2">{article.attributes.title}</h3>
+            <p class="text-[13px] text-manatee-600 line-clamp-3">The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …</p>
          </div>
-       </div>
-       <div class="shadow-sm shadow-gray-500/50">
-        <Image src={article} alt="A bird sitting on a nest of eggs." />
-         <div class="px-[31px] py-[25px] flex flex-col gap-2">
-            <span class="text-[10px] text-manatee-600">By Claire Robinson</span>
-            <h3 class="text-base text-martinique-950 font-light">Receive money in any currency with no fees</h3>
-            <p class="text-[13px] text-manatee-600">The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …</p>
-         </div>
-       </div>
-       <div class="shadow-sm shadow-gray-500/50">
-        <Image src={article} alt="A bird sitting on a nest of eggs." />
-         <div class="px-[31px] py-[25px] flex flex-col gap-2">
-            <span class="text-[10px] text-manatee-600">By Claire Robinson</span>
-            <h3 class="text-base text-martinique-950 font-light">Receive money in any currency with no fees</h3>
-            <p class="text-[13px] text-manatee-600">The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …</p>
-         </div>
-       </div>
-       <div class="shadow-sm shadow-gray-500/50">
-        <Image src={article} alt="A bird sitting on a nest of eggs." />
-         <div class="px-[31px] py-[25px] flex flex-col gap-2">
-            <span class="text-[10px] text-manatee-600">By Claire Robinson</span>
-            <h3 class="text-base text-martinique-950 font-light">Receive money in any currency with no fees</h3>
-            <p class="text-[13px] text-manatee-600">The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …</p>
-         </div>
-       </div>
+       </a>
+         ))
+       }
    </div>
-  
   </section>

@@ -1,0 +1,33 @@
+---
+import type { ApiArticleArticle } from '../../generated/contentTypes';
+import Layout from '../../layouts/Layout.astro';
+import fetchApi from '../../lib/strapi';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const articles = await fetchApi<ApiArticleArticle[]>({
+    endpoint: 'articles',
+    wrappedByKey: 'data',
+    query : {
+	populate: '*'
+  }
+  });
+    console.log(articles)
+  return articles.map((article) => ({
+    params: { slug: article.attributes.slug },
+    props: article,
+  }));
+}
+type Props = ApiArticleArticle;
+
+const article = Astro.props;
+const content = marked.parse(article.attributes.content);
+---
+
+<Layout title={article.attributes.title}>
+  <div class="px-6 py-16 lg:px-32 pt-32 bg-[#F2F2F2]">
+    <h2 class="text-5xl font-bold mb-6">{article.attributes.title}</h2>
+    <article class="text-base"  set:html={content} />
+  </div>
+   
+</Layout>

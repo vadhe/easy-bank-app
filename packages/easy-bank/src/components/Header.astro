@@ -4,26 +4,21 @@ import bgHeaderDesktop from "../images/bg-header-desktop.png";
 import Image from "astro/components/Image.astro";
 ---
 
-<header class="lg:grid grid-cols-12 items-center justify-between lg:min-h-[656px]  bg-[#F2F2F2]">
+<header class="lg:grid grid-cols-12 items-center justify-between lg:min-h-[656px] lg:px-32  bg-[#F2F2F2]">
   <div
     class="flex h-[402px] lg:hidden justify-between items-center p-4 bg-no-repeat bg-left-top"
     style=`background-image: url(${bgHeaderMobile.src});background-position-y: -4.1rem;`
   >
   </div>
-  <div class="lg:col-start-1  lg:col-end-5 text-center px-6 mb-20 mt-[-6rem] lg:mt-0">
-    <h2 class="font-light text-[40px] lg:text-[56px] text-martinique-950">Next generation digital banking</h2>
+  <div class="lg:col-start-1  lg:col-end-5 text-center lg:text-left px-6 lg:px-0 mb-20 mt-[-6rem] lg:mt-0">
+    <h2 class="font-light text-[40px] lg:text-[48px] text-martinique-950">Next generation digital banking</h2>
     <p class="text-[16px] lg:text-[18px] font-normal text-manatee-600 mt-6 mb-9">
       Take your financial life online. Your Easybank account will be a
       one-stop-shop for spending, saving, budgeting, investing, and much more.
     </p>
-    <button class="bg-gradient-to-r from-malachite-500 py-2 font-bold text-sm text-white mt-8 px-[34px] rounded-full to-shakespeare-400">Request Invite</button>
+    <button class="bg-gradient-to-br from-malachite-500 to-shakespeare-400 py-2 font-bold text-sm text-white mt-8 px-[34px] rounded-full">Request Invite</button>
   </div>
   <div class="col-start-6 col-end-12 hidden lg:block">
     <Image class='absolute top-0 right-0' src={bgHeaderDesktop} alt=''/>
-
   </div>
-  <!-- <div
-    class="items-center h-[402px] lg:col-span-6 w-full p-4 bg-no-repeat bg-left-top"
-    style=`background-image: url(${bgHeaderDesktop.src});background-position-y: -5.1rem;`
-  ></div> -->
 </header>

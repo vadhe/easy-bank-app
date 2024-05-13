@@ -4,7 +4,10 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"pnpm --filter \"easy-bank\" dev\" \"pnpm --filter \"easy-bank-api\" develop\""
+    "start:web": "pnpm --filter \"easy-bank\" dev",
+    "start:api": "pnpm --filter \"easy-bank-api\" develop",
+    "start": "concurrently \"pnpm --filter \"easy-bank\" dev\" \"pnpm --filter \"easy-bank-api\" develop\"",
+    "generated:type": "pnpm --filter \"easy-bank-api\" strapi ts:generate-types -o ../easy-bank/src/"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "logos",
   "info": {
     "singularName": "logo",
@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "logo": {
+    "image": {
       "allowedTypes": [
         "images",
         "files",
@@ -19,8 +19,7 @@
         "audios"
       ],
       "type": "media",
-      "multiple": false,
-      "required": true
+      "multiple": false
     }
   }
 }
