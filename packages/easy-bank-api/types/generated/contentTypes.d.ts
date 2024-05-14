@@ -916,6 +916,39 @@ export interface ApiLogoLogo extends Schema.SingleType {
   };
 }
 
+export interface ApiSocialMediaSocialMedia extends Schema.CollectionType {
+  collectionName: 'social_medias';
+  info: {
+    singularName: 'social-media';
+    pluralName: 'social-medias';
+    displayName: 'social-media';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    icon: Attribute.Media & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::social-media.social-media',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::social-media.social-media',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -938,6 +971,7 @@ declare module '@strapi/types' {
       'api::author.author': ApiAuthorAuthor;
       'api::feature.feature': ApiFeatureFeature;
       'api::logo.logo': ApiLogoLogo;
+      'api::social-media.social-media': ApiSocialMediaSocialMedia;
     }
   }
 }

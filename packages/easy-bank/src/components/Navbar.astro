@@ -76,11 +76,13 @@ const links: TLink[] = [
   >
   <div id="list-menu" class="absolute hidden lg:hidden top-[85px] inset-x-6 bg-white text-martinique-950 rounded-md">
     <ul class="flex flex-col items-center gap-6 py-8">
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Blog</li>
-        <li>Careers</li>
+      {
+        links.map((link: TLink) => (
+        <li class={`relative ${currentPath === link.pathname ? "active" : ""}`}>
+        <a href={link.pathname}>{link.name}</a>
+      </li>
+        ))
+      }
     </ul>
   </div>
 </nav>
